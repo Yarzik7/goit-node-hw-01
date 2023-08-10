@@ -1,1 +1,1 @@
-# goit-node-hw-01
+Скріншоти виконання команд: https://ibb.co/album/wB296N

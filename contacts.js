@@ -7,7 +7,7 @@ const contactsPath = path.join(__dirname, 'db/contacts.json');
 
 /**
  * Читає і повертає масив контактів з файлу
- * @returns array
+ * @returns {array} масив контактів
  */
 async function getListContacts() {
   const contacts = await fs.readFile(contactsPath);
@@ -17,7 +17,7 @@ async function getListContacts() {
 /**
  * Знаходить об'єкт контакту по id і повертає його
  * @param {string} contactId
- * @returns object
+ * @returns {object || null} контакт з заданим id або null
  */
 async function getContactById(contactId) {
   const contacts = await getListContacts();
@@ -28,7 +28,7 @@ async function getContactById(contactId) {
 /**
  * Видаляє контакт по id і повертає його
  * @param {string} contactId
- * @returns object
+ * @returns {object || null} видалений контакт або null
  */
 async function removeContact(contactId) {
   const contacts = await getListContacts();
@@ -44,7 +44,7 @@ async function removeContact(contactId) {
 /**
  * Створює і додає контакт до масиву, а також повертає його
  * @param {object} об'єкт параметрів контакту
- * @returns object
+ * @returns {object} створений контакт
  */
 async function addContact({ name, email, phone }) {
   const contacts = await getListContacts();
