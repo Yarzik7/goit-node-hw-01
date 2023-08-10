@@ -9,7 +9,7 @@ const contactsPath = path.join(__dirname, 'db/contacts.json');
  * Читає і повертає масив контактів з файлу
  * @returns array
  */
-async function listContacts() {
+async function getListContacts() {
   const contacts = await fs.readFile(contactsPath);
   return JSON.parse(contacts);
 }
@@ -20,7 +20,7 @@ async function listContacts() {
  * @returns object
  */
 async function getContactById(contactId) {
-  const contacts = await listContacts();
+  const contacts = await getListContacts();
   const contactById = contacts.find(({ id }) => id === String(contactId));
   return contactById ?? null;
 }
@@ -31,7 +31,7 @@ async function getContactById(contactId) {
  * @returns object
  */
 async function removeContact(contactId) {
-  const contacts = await listContacts();
+  const contacts = await getListContacts();
   const contactIdx = contacts.findIndex(({ id }) => id === String(contactId));
   if (contactIdx === -1) {
     return null;
@@ -47,11 +47,11 @@ async function removeContact(contactId) {
  * @returns object
  */
 async function addContact({ name, email, phone }) {
-  const contacts = await listContacts();
+  const contacts = await getListContacts();
   const newContact = { id: nanoid(), name, email, phone };
   contacts.push(newContact);
   await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
   return newContact;
 }
 
-module.exports = { listContacts, getContactById, removeContact, addContact };
+module.exports = { getListContacts, getContactById, removeContact, addContact };

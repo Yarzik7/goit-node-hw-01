@@ -1,4 +1,4 @@
-const { listContacts, getContactById, removeContact, addContact } = require('./contacts');
+const { getListContacts, getContactById, removeContact, addContact } = require('./contacts');
 const { program } = require('commander');
 
 program
@@ -15,7 +15,7 @@ const argv = program.opts();
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
-      const contacts = await listContacts();
+      const contacts = await getListContacts();
       return console.table(contacts);
 
     case 'get':
